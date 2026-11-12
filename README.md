@@ -116,37 +116,6 @@ toque 10 vezes em **Versão**, abra **⋮ → Configurações do desenvolvedor**
 [youtubedl-android](https://github.com/JunkFood02/youtubedl-android) (yt-dlp) ·
 [MusicBrainz](https://musicbrainz.org) · [Cover Art Archive](https://coverartarchive.org)
 
-## Compilar você mesmo (Windows)
-
-Você só faz isso uma vez; depois é só repetir os passos 4 e 5 quando houver atualização.
-
-1. **Instale o Flutter**: https://docs.flutter.dev/get-started/install/windows/mobile
-   (baixe o .zip, extraia em `C:\src\flutter` e adicione `C:\src\flutter\bin` ao PATH).
-2. **Instale o Android Studio**: https://developer.android.com/studio. Abra uma vez e deixe ele
-   instalar o Android SDK. Depois, num terminal novo:
-   ```
-   flutter doctor --android-licenses
-   flutter doctor
-   ```
-   Aceite as licenças. O `flutter doctor` deve mostrar ✓ em "Flutter" e "Android toolchain".
-3. **No celular**: ative as Opções do desenvolvedor (Configurações → Sobre o telefone → toque 7 vezes
-   em "Número da versão") e ligue a **Depuração USB**. Conecte o celular no PC pelo cabo e aceite
-   o aviso que aparece no celular.
-4. Na pasta deste projeto:
-   ```
-   flutter pub get
-   flutter build apk --release
-   ```
-   O APK fica em `build\app\outputs\flutter-apk\app-release.apk`.
-5. **Instale**:
-   ```
-   flutter install --release
-   ```
-   (ou copie o `app-release.apk` para o celular e abra o arquivo; o Android vai pedir para permitir
-   instalar de fontes desconhecidas).
-
-> Para testar com o celular conectado e ver os erros no terminal: `flutter run`.
-
 ## Configurações do app
 
 Na tela Início, toque na engrenagem:
@@ -181,30 +150,6 @@ na mesma pasta. **Se o app for desinstalado, essa pasta é apagada junto.**
 - **Downloads pararam de funcionar de repente**: o YouTube muda com frequência. Em Configurações,
   toque em **Atualizar yt-dlp agora** (não precisa gerar outro APK).
 - A Play Store não aceita apps que baixam do YouTube; por isso a instalação é pelo APK.
-
-## Estrutura
-
-```
-lib/
-  main.dart                 inicialização, abas, "Compartilhar → Vitrola"
-  core/text.dart            limpeza de títulos e comparação de textos
-  core/models.dart          modelos (música, álbum, artista, playlist, download)
-  services/library.dart     banco SQLite
-  services/youtube.dart     interface de acesso ao YouTube
-  services/ytdlp.dart       yt-dlp embutido (canal com android/.../YtDlpBridge.kt)
-  services/spotify.dart     links do Spotify (API oficial ou página pública)
-  services/matcher.dart     identificação e escolha do vídeo certo
-  services/metadata.dart    MusicBrainz, capas, Wikipedia
-  services/importer.dart    importar músicas do celular (leitura das tags)
-  services/downloader.dart  fila de downloads
-  services/player.dart      player (just_audio)
-  services/audio_handler.dart  notificação, tela de bloqueio e Android Auto (audio_service)
-  ui/screens/shelf_screen.dart    vitrine de álbuns (celular deitado)
-  ui/screens/estante_screen.dart  Estante: cover flow e vitrola animada
-  ui/                       telas e componentes
-android/.../CoverProvider.kt  capas para o Android Auto e a tela de bloqueio
-test/                       testes (rodar com: flutter test)
-```
 
 ## Aviso legal
 
